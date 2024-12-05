@@ -34,7 +34,6 @@ SOFTWARE.
 
 
 #include <stdio.h>
-
 #include <unistd.h>
 
 #include "../FS-AI_API/fs-ai_api.h"
@@ -50,13 +49,13 @@ int main(int argc, char** argv) {
             return(1);
         }
         
-        if(fs_ai_api_init(argv[1],1,1)) {	// initialise with Debug & Simulate flags
+        if(fs_ai_api_init(argv[1],1,0)) {	// initialise with Debug & Simulate flags
 			printf("fs_ai_api_init() failed\r\n");
 			return(1);
 		} 
 
 	printf("\033[2J"); // clear the screen
-
+	
 	while(1) {
 		// get some data
 		fs_ai_api_vcu2ai_get_data(&vcu2ai_data);
@@ -89,16 +88,10 @@ int main(int argc, char** argv) {
 		} else {	// should not be possible
 			printf("HANDSHAKE_BIT error\r\n");
 		}
-
-		ai2vcu_data.AI2VCU_MISSION_STATUS = MISSION_SELECTED;
-		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = DIRECTION_FORWARD;
-		ai2vcu_data.AI2VCU_ESTOP_REQUEST = ESTOP_NO;
-		ai2vcu_data.AI2VCU_STEER_ANGLE_REQUEST_deg = 9.9f;
-		ai2vcu_data.AI2VCU_AXLE_SPEED_REQUEST_rpm = 999.0f;
-		ai2vcu_data.AI2VCU_AXLE_TORQUE_REQUEST_Nm = 99.0f;
-		ai2vcu_data.AI2VCU_BRAKE_PRESS_REQUEST_pct = 99.0f;
-
-		fs_ai_api_ai2vcu_set_data(&ai2vcu_data);
+				ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
+				i++;
+				ai2vcu_data.AI2VCU_AXLE_SPEED_REQUEST_rpm = i;
+				fs_ai_api_ai2vcu_set_data(&ai2vcu_data);
 
 		// repeat roughly every 10ms
 		usleep(10000);
