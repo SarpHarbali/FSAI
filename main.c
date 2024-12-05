@@ -9,7 +9,7 @@
 void static_inspection_a() {
 	fs_ai_api_vcu2ai vcu2ai_data;
 	fs_ai_api_ai2vcu ai2vcu_data;
-	ai2vcu_data.AI2VCU_ESTOP_REQEUST = 0;
+	ai2vcu_data.AI2VCU_ESTOP_REQUEST = 0;
 	// TODO: Implement proper start-up sequence inline with the state machine
 	
 	int phase = 0;	
