@@ -19,7 +19,7 @@ void static_inspection_a() {
 	float rpm = 0.0;
 	float delta_rpm = 0.2; // We need get rpm to 200 in 10 seconds. The Tx of the CAN message is 10ms.
 	float brake_pct = 0.0;
-	float delta_brake = 15.0/100;
+	float delta_brake = 30.0/100;
 
 	while(1) {
 		printf("\e[1;1H\e[2J");	//clear screen
@@ -32,14 +32,6 @@ void static_inspection_a() {
 		printf("AI2VCU_AXLE_TORQUE_REQUEST_Nm   %4.0f    \r\n",ai2vcu_data.AI2VCU_AXLE_TORQUE_REQUEST_Nm);
 		printf("AI2VCU_BRAKE_PRESS_REQUEST_pct  %4.0f    \r\n",ai2vcu_data.AI2VCU_BRAKE_PRESS_REQUEST_pct);
 		
-		if(HANDSHAKE_RECEIVE_BIT_OFF == vcu2ai_data.VCU2AI_HANDSHAKE_RECEIVE_BIT) {
-			ai2vcu_data.AI2VCU_HANDSHAKE_SEND_BIT = HANDSHAKE_SEND_BIT_OFF;
-		} else if (HANDSHAKE_RECEIVE_BIT_ON == vcu2ai_data.VCU2AI_HANDSHAKE_RECEIVE_BIT) {
-			ai2vcu_data.AI2VCU_HANDSHAKE_SEND_BIT = HANDSHAKE_SEND_BIT_ON;
-		} else {	// should not be possible
-			printf("HANDSHAKE_BIT error\r\n");
-		}
-		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = 0;
 		ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
 		switch (phase) {
 			case 0:
@@ -89,10 +81,20 @@ while(1) {
 	printf("fs_ai_api_init() failed\r\n");
 	return(1);
     } 
+	
+    if(HANDSHAKE_RECEIVE_BIT_OFF == vcu2ai_data.VCU2AI_HANDSHAKE_RECEIVE_BIT) {
+			ai2vcu_data.AI2VCU_HANDSHAKE_SEND_BIT = HANDSHAKE_SEND_BIT_OFF;
+		} else if (HANDSHAKE_RECEIVE_BIT_ON == vcu2ai_data.VCU2AI_HANDSHAKE_RECEIVE_BIT) {
+			ai2vcu_data.AI2VCU_HANDSHAKE_SEND_BIT = HANDSHAKE_SEND_BIT_ON;
+		} else {	// should not be possible
+			printf("HANDSHAKE_BIT error\r\n");
+		}
+		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = 0;
 
     printf("Type a mission number: \n");
     int mission;
     scanf("%i", &mission);
+
     switch (mission) {
 	case -1:
 	    return(0);
