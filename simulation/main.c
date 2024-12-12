@@ -9,7 +9,6 @@
 void static_inspection_a() {
 	fs_ai_api_vcu2ai vcu2ai_data;
 	fs_ai_api_ai2vcu ai2vcu_data;
-	ai2vcu_data.AI2VCU_ESTOP_REQUEST = 0;
 	// TODO: Implement proper start-up sequence inline with the state machine
 	
 	int phase = 0;	
@@ -72,40 +71,58 @@ void static_inspection_a() {
 };
 
 int main(int argc, char** argv) {
-while(1) {
-    	if (argc < 2) {
-    	printf("Too few arguments!\r\n");
-	printf("Usage: fs-ai_api_tester <can>\r\n");
-        return(1);
-    }
-        
-    if(fs_ai_api_init(argv[1],1,0)) {	// initialise with Debug flag
-	printf("fs_ai_api_init() failed\r\n");
-	return(1);
-    } 
-	
-    if(HANDSHAKE_RECEIVE_BIT_OFF == vcu2ai_data.VCU2AI_HANDSHAKE_RECEIVE_BIT) {
-			ai2vcu_data.AI2VCU_HANDSHAKE_SEND_BIT = HANDSHAKE_SEND_BIT_OFF;
-		} else if (HANDSHAKE_RECEIVE_BIT_ON == vcu2ai_data.VCU2AI_HANDSHAKE_RECEIVE_BIT) {
-			ai2vcu_data.AI2VCU_HANDSHAKE_SEND_BIT = HANDSHAKE_SEND_BIT_ON;
-		} else {	// should not be possible
-			printf("HANDSHAKE_BIT error\r\n");
+
+	fs_ai_api_vcu2ai vcu2ai_data;
+	fs_ai_api_ai2vcu ai2vcu_data;
+
+	if (argc < 2) {
+	  	printf("Too few arguments!\r\n");
+		printf("Usage: fs-ai_api_tester <can>\r\n");
+		return(1);
 		}
-
-    printf("Type a mission number: \n");
-    int mission;
-    scanf("%i", &mission);
-
-    switch (mission) {
-	case -1:
-	    return(0);
-        case 5:
-            static_inspection_a();
-            break;
-        default:
-	    printf("Mission not implemented\n");
-            break;
-
+	        
+    if(fs_ai_api_init(argv[1],1,0)) {	// initialise with Debug flag
+		printf("fs_ai_api_init() failed\r\n");
+		return(1);
     }
-  }
+
+
+	while(1) {
+
+
+	    
+		fs_ai_api_vcu2ai_get_data(&vcu2ai_data); 
+
+		if(HANDSHAKE_RECEIVE_BIT_OFF == vcu2ai_data.VCU2AI_HANDSHAKE_RECEIVE_BIT) {
+				ai2vcu_data.AI2VCU_HANDSHAKE_SEND_BIT = HANDSHAKE_SEND_BIT_OFF;
+			} else if (HANDSHAKE_RECEIVE_BIT_ON == vcu2ai_data.VCU2AI_HANDSHAKE_RECEIVE_BIT) {
+				ai2vcu_data.AI2VCU_HANDSHAKE_SEND_BIT = HANDSHAKE_SEND_BIT_ON;
+			} else {	// should not be possible
+
+				printf("HANDSHAKE_BIT error\r\n");
+
+			}
+		
+	
+	    int mission;
+	   	mission = vcu2ai_data.VCU2AI_AMI_STATE;
+	   	//printf("\r Mission value is %d \n ", mission);
+	    ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
+	    switch (mission) {
+		case -1:
+		    return(0);
+		case 0:
+			printf("\rMission not selected, mission value is %d", mission);
+			fflush(stdout);
+			usleep(100000);
+			break;
+	    case 5:
+	        static_inspection_a();
+	        break;
+	    default:
+		    printf("Mission not implemented \n");
+	        break;
+
+	    }
+	}
 }
