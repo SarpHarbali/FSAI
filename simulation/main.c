@@ -31,9 +31,11 @@ void static_inspection_a() {
 		printf("AI2VCU_AXLE_SPEED_REQUEST_rpm   %4.0f    \r\n",ai2vcu_data.AI2VCU_AXLE_SPEED_REQUEST_rpm);
 		printf("AI2VCU_AXLE_TORQUE_REQUEST_Nm   %4.0f    \r\n",ai2vcu_data.AI2VCU_AXLE_TORQUE_REQUEST_Nm);
 		printf("AI2VCU_BRAKE_PRESS_REQUEST_pct  %4.0f    \r\n",ai2vcu_data.AI2VCU_BRAKE_PRESS_REQUEST_pct);
-		
+        ai2vcu_data.AI2VCU_ESTOP_REQUEST = 0;	
 		ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
-		switch (phase) {
+		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = 0;
+	
+        switch (phase) {
 			case 0:
 				steer_angle += delta_theta;
 				if (steer_angle >= 21) {steer_angle = 21; phase++;}
@@ -89,7 +91,6 @@ while(1) {
 		} else {	// should not be possible
 			printf("HANDSHAKE_BIT error\r\n");
 		}
-		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = 0;
 
     printf("Type a mission number: \n");
     int mission;
