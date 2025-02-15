@@ -16,7 +16,6 @@ int main(int argc, char** argv) {
 	    printf("Usage: vcu <can>\r\n");
         return(1);
     }
-    printf("%i", can_init(argv[1]));
 
     int mission;
     printf("Select mission number: \n");
