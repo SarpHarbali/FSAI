@@ -1,7 +1,6 @@
 #include <stdio.h>
-
+#include <math.h>
 #include <unistd.h>
-
 #include <stdbool.h>
 
 #include "./FS-AI_API/fs-ai_api.h"
@@ -12,11 +11,12 @@ void static_inspection_a() {
 	// TODO: Implement proper start-up sequence inline with the state machine
 	
 	int phase = 0;	
-	float steer_angle = 0.0; 
-	float steer_rate = 21.0; // in degrees per second
-	float delta_theta = steer_rate/100;
+    int moment = 0;
+    float power = 17000; //this is the peak continuous 
+    float PI = 3.141592;
+  
 	float rpm = 0.0;
-	float delta_rpm = 0.2; // We need get rpm to 200 in 10 seconds. The Tx of the CAN message is 10ms.
+	float delta_rpm = 0.4; // We need get rpm to 200 in 10 seconds. The Tx of the CAN message is 10ms.
 	float brake_pct = 0.0;
 	float delta_brake = 30.0/100;
 
@@ -30,42 +30,37 @@ void static_inspection_a() {
 		printf("AI2VCU_AXLE_SPEED_REQUEST_rpm   %4.0f    \r\n",ai2vcu_data.AI2VCU_AXLE_SPEED_REQUEST_rpm);
 		printf("AI2VCU_AXLE_TORQUE_REQUEST_Nm   %4.0f    \r\n",ai2vcu_data.AI2VCU_AXLE_TORQUE_REQUEST_Nm);
 		printf("AI2VCU_BRAKE_PRESS_REQUEST_pct  %4.0f    \r\n",ai2vcu_data.AI2VCU_BRAKE_PRESS_REQUEST_pct);
+        printf("Moment %d \r\n", moment);
         ai2vcu_data.AI2VCU_ESTOP_REQUEST = 0;	
 		ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
 		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = 0;
+        ai2vcu_data.AI2VCU_AXLE_TORQUE_REQUEST_Nm = 95; // this keeps the motor at continues torque rating
 	
         switch (phase) {
 			case 0:
-				steer_angle += delta_theta;
-				if (steer_angle >= 21) {steer_angle = 21; phase++;}
+				steer_angle = 21*sin(PI/2*moment*0.01);
+				if (moment >= 400) {steer_angle = 0; phase++;}
 				break;
 			case 1:
-				steer_angle -= delta_theta;
-				if (steer_angle <= -21) {steer_angle = -21; phase++;}
-				break;
-			case 2:
-				steer_angle += delta_theta;
-				if (steer_angle >= 0) {steer_angle = 0; phase++;}
-			     	break;
-			case 3:
 				steer_angle = 0;
 				rpm += delta_rpm; 
 				if (rpm >= 200) {rpm=200; phase++;}
 				break;
-			case 4:
+			case 2:
 				rpm = 0;
 				brake_pct += delta_brake;
 				if (brake_pct >= 100) {brake_pct = 100; phase++;}
 				break;
-			case 5:
+			case 3:
 				// TODO: Add propper CAN sign-off and mission completion
 				break;
 		}
 		ai2vcu_data.AI2VCU_STEER_ANGLE_REQUEST_deg = steer_angle;
 		ai2vcu_data.AI2VCU_AXLE_SPEED_REQUEST_rpm = rpm;
 		ai2vcu_data.AI2VCU_BRAKE_PRESS_REQUEST_pct = brake_pct;
-		fs_ai_api_ai2vcu_set_data(&ai2vcu_data);
-		usleep(10000);
+        fs_ai_api_ai2vcu_set_data(&ai2vcu_data);
+        moment++;
+        usleep(10000);   // sleep for ~10ms
 	}	
 
 };
@@ -121,7 +116,6 @@ int main(int argc, char** argv) {
 	        break;
 	    default:
 		    printf("Mission not implemented \n");
-	        break;
 
 	    }
 	}

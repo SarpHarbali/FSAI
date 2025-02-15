@@ -5,7 +5,7 @@ SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 
 CFLAGS = 
-LDFLAGS = -lpthread -Wl,./FS-AI_API/fs-ai_api.a
+LDFLAGS = -lpthread -Wl,./FS-AI_API/fs-ai_api.a -lm
 
 main: $(OBJ) $(CFLAGS)
 	make -C ./FS-AI_API/
