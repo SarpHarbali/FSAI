@@ -1,0 +1,4 @@
+priority: write can documentation in markdown
+start implementing the vehicle controller from c sharp to c with can messages
+folder called controller_c with the c files
+create dummy data for now as inputs
