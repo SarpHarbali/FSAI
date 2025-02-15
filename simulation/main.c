@@ -30,7 +30,6 @@ void static_inspection_a() {
 		printf("AI2VCU_AXLE_SPEED_REQUEST_rpm   %4.0f    \r\n",ai2vcu_data.AI2VCU_AXLE_SPEED_REQUEST_rpm);
 		printf("AI2VCU_AXLE_TORQUE_REQUEST_Nm   %4.0f    \r\n",ai2vcu_data.AI2VCU_AXLE_TORQUE_REQUEST_Nm);
 		printf("AI2VCU_BRAKE_PRESS_REQUEST_pct  %4.0f    \r\n",ai2vcu_data.AI2VCU_BRAKE_PRESS_REQUEST_pct);
-        printf("Moment %d \r\n", moment);
         ai2vcu_data.AI2VCU_ESTOP_REQUEST = 0;	
 		ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
 		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = 0;
