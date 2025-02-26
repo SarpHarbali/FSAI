@@ -51,9 +51,11 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# Obsidian
+*/.obsidian/workspace.json
+
 # Extras
 .vscode/
 FS-AI_API_Console/fs-ai_api_console
 FS-AI_API_Tester/fs-ai_api_tester
-
 .DS_Store/
