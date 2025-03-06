@@ -8,35 +8,33 @@ typedef struct {
 
 } Input;
 
-typedef struct {
-	typedef struct{
-		double m,g,I_z,C_f,C_r;
-	}
-	Inertia;
 
-	typedef struct{
-		double l, b_F, b_R, w_front, l_F, l_R, axle_width;
-	}
-	Kinematic;
+typedef struct{
+	double m,g,I_z,C_f,C_r;
+} Inertia;
 
-	typedef struct{
-		double tire_coefficient, B, C, D, E, radius;
-	}
-	Tire;
+typedef struct{
+	double l, b_F, b_R, w_front, l_F, l_R, axle_width;
+} Kinematic;
 
-	typedef struct{
-		double c_down, c_drag;
-	} Aero;
+typedef struct{
+	double tire_coefficient, B, C, D, E, radius;
+} Tire;
 
-	typedef struct{
-		typedef struct{
-			double min, max;
-		} Range;
-		
-	Range acc, vel, delta;
-	}
-	InputRanges;
+typedef struct{
+	double c_down, c_drag;
+} Aero;
 
+
+typedef struct{
+		double min, max;
+} Range;
+
+typedef struct{
+	Range acc, vel, data;
+} InputRanges;
+
+typedef struct {		
 	Inertia inertia;
 	Kinematic kinematic;
 	Tire tire;
