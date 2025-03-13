@@ -59,3 +59,5 @@ dkms.conf
 FS-AI_API_Console/fs-ai_api_console
 FS-AI_API_Tester/fs-ai_api_tester
 .DS_Store/
+
+simulation/path_c/build/
