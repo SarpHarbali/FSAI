@@ -82,4 +82,14 @@ typedef struct {
 } Param;
 
 #endif
+
+#ifndef VEHICLEMODEL_H
+#define VEHICLEMODEL_H
+
+typedef struct {
+	Param param;
+} VehicleModel;
+
+#endif
+
 // Not defining WheelInfo as it is not used

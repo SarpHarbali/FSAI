@@ -48,4 +48,3 @@ char* stringifyState(State state) {
     state.a_x, state.a_y, state.a_z);
     return str;
 }
-
