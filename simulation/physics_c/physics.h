@@ -65,7 +65,7 @@ typedef struct{
 #define INPUTRANGES_H
 
 typedef struct{
-	Range acc, vel, data;
+	Range acc, vel, delta;
 } InputRanges;
 
 #endif

@@ -3,6 +3,7 @@
 #include "controller.h"
 
 double speedLookaheadSensitivity = 0.7;
+double steeringLookaheadSensitivity = 0.1;
 double DELTA_TIME = 0.01;
 double MAX_SPEED = 30.1964649875;
 double ACC_FACTOR =  0.002;
@@ -24,17 +25,44 @@ double clamp(double d, double min, double max) {
   return t > max ? max : t;		
 }
 
+// Returns the steering angle for CAN in the interval [-21, 21]°
+double calculateSteeringAngle(Vector3 checkpoints[], int numberOfCheckpoints, double speed, Vector3 position, Vector2 forward) {
+    int lookaheadIndex = fmin(floor(steeringLookaheadSensitivity * speed) + 1,
+     numberOfCheckpoints - 1);
+    // printf("Lookahead Index: %d\n", lookaheadIndex);
+    Vector2 direction = {checkpoints[lookaheadIndex].x - position.x,
+    checkpoints[lookaheadIndex].z - position.z};
+    // printf("Desired direction: (%f, %f)\n", direction.x, direction.y);
+    double distance = sqrt(direction.x*direction.x + direction.y*direction.y);
+    // printf("Distance: %f\n", distance);
+    double theta = signedAngle(forward, direction);
+    // printf("Angle: %f\n", theta);
+    if (speed == 0) {
+        speed = 0.1;
+    }
+    double reactionTime = fmax(distance/speed, 0.1);
+    double deltaTheta = -theta/reactionTime;
+    double updatedTheta = theta + deltaTheta*DELTA_TIME;
+    if (updatedTheta < -21) {
+        updatedTheta = -21;
+    } else if (updatedTheta > 21) {
+        updatedTheta = 21;
+    }
+    return updatedTheta;
+}
+
+
 double calculateThrottle(Vector3 checkpoints[], int numberOfCheckpoints, double speed, Vector3 position, Vector2 forward) {
         int lookaheadIndex = fmin(floor(speedLookaheadSensitivity * speed) + 1,
         numberOfCheckpoints - 1);
-        printf("Lookahead Index: %d\n", lookaheadIndex);
+        // printf("Lookahead Index: %d\n", lookaheadIndex);
         Vector2 direction = {checkpoints[lookaheadIndex].x - position.x,
         checkpoints[lookaheadIndex].z - position.z};
-        printf("Desired direction: (%f, %f)\n", direction.x, direction.y);
+        // printf("Desired direction: (%f, %f)\n", direction.x, direction.y);
         double distance = sqrt(direction.x*direction.x + direction.y*direction.y);
-        printf("Distance: %f\n", distance);
+        // printf("Distance: %f\n", distance);
         double theta = signedAngle(forward, direction);
-        printf("Angle: %f\n", theta);
+        // printf("Angle: %f\n", theta);
         double expectedSpeed;
         if (theta == 0) {
             expectedSpeed = MAX_SPEED;
@@ -63,5 +91,6 @@ double calculateThrottle(Vector3 checkpoints[], int numberOfCheckpoints, double 
 //     Vector2 forward = {0, 1};  // Make an angle of 0 with the positive Y-axis according to Unity's starting rotation
 //     printf("\n");
 //     printf("\n==========================\nCalculated Throttle: %f\n", calculateThrottle(checkpointPositions, numberOfCheckpoints, speed, position, forward));
+//     printf("\n==========================\nCalculated Steering Angle: %f\n", calculateSteeringAngle(checkpointPositions, numberOfCheckpoints, speed, position, forward));
 //     return 0;
 // }
