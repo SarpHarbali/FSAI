@@ -2,7 +2,7 @@
 #include <stdio.h>      
 #include "controller.h"
 
-double lookaheadSensitivity = 0.7;
+double steeringLookaheadSensitivity = 0.1;
 double DELTA_TIME = 0.01;
 
 // Positive angles are counterclockwise
@@ -17,7 +17,7 @@ double signedAngle(Vector2 a, Vector2 b){
 
 // Returns the steering angle for CAN in the interval [-21, 21]°
 double calculateSteeringAngle(Vector3 checkpoints[], int numberOfCheckpoints, double speed, Vector3 position, Vector2 forward) {
-    int lookaheadIndex = fmin(floor(lookaheadSensitivity * speed) + 1,
+    int lookaheadIndex = fmin(floor(steeringLookaheadSensitivity * speed) + 1,
      numberOfCheckpoints - 1);
     printf("Lookahead Index: %d\n", lookaheadIndex);
     Vector2 direction = {checkpoints[lookaheadIndex].x - position.x,
@@ -26,6 +26,7 @@ double calculateSteeringAngle(Vector3 checkpoints[], int numberOfCheckpoints, do
     double distance = sqrt(direction.x*direction.x + direction.y*direction.y);
     printf("Distance: %f\n", distance);
     double theta = signedAngle(forward, direction);
+    printf("Angle: %f\n", theta);
     if (speed == 0) {
         speed = 0.1;
     }
@@ -53,5 +54,5 @@ double calculateSteeringAngle(Vector3 checkpoints[], int numberOfCheckpoints, do
 //     Vector2 forward = {0, 1};  // Make an angle of 0 with the positive Y-axis according to Unity's starting rotation
 //     printf("\n");
 //     printf("\n==========================\nCalculated Steering Angle: %f\n", calculateSteeringAngle(checkpointPositions, numberOfCheckpoints, speed, position, forward));
-//     return(0);
+//     return 0;
 // }

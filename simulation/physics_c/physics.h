@@ -65,7 +65,7 @@ typedef struct{
 #define INPUTRANGES_H
 
 typedef struct{
-	Range acc, vel, data;
+	Range acc, vel, delta;
 } InputRanges;
 
 #endif
@@ -82,4 +82,14 @@ typedef struct {
 } Param;
 
 #endif
+
+#ifndef VEHICLEMODEL_H
+#define VEHICLEMODEL_H
+
+typedef struct {
+	Param param;
+} VehicleModel;
+
+#endif
+
 // Not defining WheelInfo as it is not used
