@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-#include "./FS-AI_API/fs-ai_api.h"
+#include "fs-ai_api.h"
 
 void static_inspection_a() {
 	fs_ai_api_vcu2ai vcu2ai_data;
@@ -35,7 +35,8 @@ void static_inspection_a() {
 		ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
 		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = 0;
         ai2vcu_data.AI2VCU_AXLE_TORQUE_REQUEST_Nm = 95; // this keeps the motor at continues torque rating
-	
+		double steer_angle;
+
         switch (phase) {
 			case 0:
 				steer_angle = 21*sin(PI/2*moment*0.01);
