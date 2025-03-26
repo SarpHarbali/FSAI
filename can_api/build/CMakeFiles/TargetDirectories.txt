@@ -1,7 +1,0 @@
-/home/josh/FS-AI_API/can_api/build/CMakeFiles/can_dashboard.dir
-/home/josh/FS-AI_API/can_api/build/CMakeFiles/vcu.dir
-/home/josh/FS-AI_API/can_api/build/CMakeFiles/edit_cache.dir
-/home/josh/FS-AI_API/can_api/build/CMakeFiles/rebuild_cache.dir
-/home/josh/FS-AI_API/can_api/build/FS-AI_API/CMakeFiles/fs_ai.dir
-/home/josh/FS-AI_API/can_api/build/FS-AI_API/CMakeFiles/edit_cache.dir
-/home/josh/FS-AI_API/can_api/build/FS-AI_API/CMakeFiles/rebuild_cache.dir

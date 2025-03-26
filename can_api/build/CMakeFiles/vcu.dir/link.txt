@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/vcu.dir/vcu.c.o -o vcu  FS-AI_API/libfs_ai.a -lpthread -lm 

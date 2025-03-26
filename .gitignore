@@ -42,6 +42,9 @@
 *.idb
 *.pdb
 
+# Built CMake
+*build/
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
@@ -56,6 +59,7 @@ dkms.conf
 
 # Extras
 .vscode/
+*.DS_Store
 FS-AI_API_Console/fs-ai_api_console
 FS-AI_API_Tester/fs-ai_api_tester
 .DS_Store/
