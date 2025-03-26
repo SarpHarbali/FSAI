@@ -1,4 +1,0 @@
-Checkpoints: see checkpoints.txt
-Velocity: Initially 0
-Position: Initially 0,0
-Forward Vector: Initially 1,0
