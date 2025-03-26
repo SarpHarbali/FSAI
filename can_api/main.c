@@ -108,7 +108,7 @@ int main(int argc, char** argv) {
 		case -1:
 		    return(0);
 		case 0:
-			printf("\rMission not selected, mission value is %d", mission);
+			printf("\rAwaiting mission selection from vcu, mission value is %d", mission);
 			fflush(stdout);
 			usleep(100000);
 			break;

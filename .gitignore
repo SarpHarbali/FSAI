@@ -43,7 +43,7 @@
 *.pdb
 
 # Built CMake
-build/
+*build/
 
 # Kernel Module Compile Results
 *.mod*
