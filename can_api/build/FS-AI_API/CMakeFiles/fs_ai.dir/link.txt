@@ -1,0 +1,2 @@
+/usr/bin/ar qc libfs_ai.a "CMakeFiles/fs_ai.dir/fs-ai_api.c.o" CMakeFiles/fs_ai.dir/can.c.o
+/usr/bin/ranlib libfs_ai.a

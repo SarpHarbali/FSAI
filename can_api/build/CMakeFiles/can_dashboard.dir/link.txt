@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/can_dashboard.dir/main.c.o -o can_dashboard  FS-AI_API/libfs_ai.a -lpthread -lm 
