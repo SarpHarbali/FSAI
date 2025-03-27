@@ -1,0 +1,6 @@
+# This is a generated file and its contents are an internal implementation detail.
+# The update step will be re-executed if anything in this file changes.
+# No other meaning or use of this file is supported.
+
+command=/usr/local/bin/cmake;-DFREETYPE_DIR=/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-src;-P;/Users/talin/git/FSAI/simulation/2dsim/build/_deps/sfml-src/tools/freetype/PatchFreetype.cmake
+work_dir=/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-src

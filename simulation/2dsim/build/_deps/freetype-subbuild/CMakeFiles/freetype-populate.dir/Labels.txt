@@ -1,0 +1,14 @@
+# Target labels
+ freetype-populate
+# Source files and their labels
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/CMakeFiles/freetype-populate
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/CMakeFiles/freetype-populate.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/CMakeFiles/freetype-populate-complete.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-build.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-configure.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-download.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-install.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-mkdir.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-patch.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-test.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-update.rule

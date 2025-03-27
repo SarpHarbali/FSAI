@@ -1,0 +1,14 @@
+# Target labels
+ vorbis-populate
+# Source files and their labels
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/CMakeFiles/vorbis-populate
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/CMakeFiles/vorbis-populate.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/CMakeFiles/vorbis-populate-complete.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-build.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-configure.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-download.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-install.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-mkdir.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-patch.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-test.rule
+/Users/talin/git/FSAI/simulation/2dsim/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-update.rule
