@@ -1,12 +1,9 @@
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <stdbool.h>
 
-#include "../FS-AI_API/fs-ai_api.h"
-
-#include "../FS-AI_API/can.h"
+#include "fs-ai_api.h"
+#include "can.h"
 
 static struct can_frame VCU2AI_Status = {0x520, 8};
 

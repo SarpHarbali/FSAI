@@ -32,7 +32,7 @@ void static_inspection_a() {
 		printf("AI2VCU_BRAKE_PRESS_REQUEST_pct  %4.0f    \r\n",ai2vcu_data.AI2VCU_BRAKE_PRESS_REQUEST_pct);
         printf("Moment %d \r\n", moment);
         ai2vcu_data.AI2VCU_ESTOP_REQUEST = 0;	
-		ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
+		ai2vcu_data.AI2VCU_MISSION_STATUS = 2;
 		ai2vcu_data.AI2VCU_DIRECTION_REQUEST = 0;
         ai2vcu_data.AI2VCU_AXLE_TORQUE_REQUEST_Nm = 95; // this keeps the motor at continues torque rating
 		double steer_angle;
@@ -50,9 +50,18 @@ void static_inspection_a() {
 			case 2:
 				rpm = 0;
 				brake_pct += delta_brake;
-				if (brake_pct >= 100) {brake_pct = 100; phase++;}
+				if (brake_pct >= 100) {brake_pct = 100}
+				if (vcu2ai_data.VCU2AI_FL_WHEEL_SPEED_rpm == 0 &&
+					vcu2ai_data.VCU2AI_FL_WHEEL_SPEED_rpm == 0 &&
+					vcu2ai_data.VCU2AI_FL_WHEEL_SPEED_rpm == 0 &&
+					vcu2ai_data.VCU2AI_FL_WHEEL_SPEED_rpm == 0)
+					{
+						phase++;
+					}
 				break;
 			case 3:
+				ai2vcu_data.AI2VCU_MISSION_STATUS = 3;
+				return
 				// TODO: Add propper CAN sign-off and mission completion
 				break;
 		}
@@ -103,15 +112,15 @@ int main(int argc, char** argv) {
 	    int mission;
 	   	mission = vcu2ai_data.VCU2AI_AMI_STATE;
 	   	//printf("\r Mission value is %d \n ", mission);
-	    ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
 	    switch (mission) {
 		case -1:
 		    return(0);
 		case 0:
 			printf("\rAwaiting mission selection from vcu, mission value is %d", mission);
 			fflush(stdout);
-			usleep(100000);
+			usleep(10000);
 			break;
+	    ai2vcu_data.AI2VCU_MISSION_STATUS = 1;
 	    case 5:
 	        static_inspection_a();
 	        break;
